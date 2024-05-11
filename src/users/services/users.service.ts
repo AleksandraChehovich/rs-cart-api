@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-
 import { v4 } from 'uuid';
-
 import { User } from '../models';
 
 @Injectable()

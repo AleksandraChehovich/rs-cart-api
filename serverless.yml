@@ -1,0 +1,49 @@
+service: serverless-database
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-1
+  # setup profile for AWS CLI.
+  profile: default
+
+  # environment:
+  #  HOST: database-aws-course.c94kymqkmuma.eu-west-1.rds.amazonaws.com
+  #  PORT: 5432
+  #  DATABASE: first_database
+  #  USERNAME: postgres
+  #  PASSWORD: 8k0qrSDBQ43c108sI1Xb
+
+plugins:
+  - serverless-offline
+  # - serverless-finch
+  # - serverless-single-page-app-plugin
+  # - serverless-s3-cleaner
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+          cors: true
+      - http:
+          method: ANY
+          path: '{proxy+}'
+          cors: true
+
+# functions:
+#   pgLambda:
+#     handler: pg-lambda.handler
+#     events:
+#       - http:
+#           method: ANY
+#           path: /
+#           cors: true
+#       - http:
+#           method: ANY
+#           path: '{proxy+}'
+#           cors: true
